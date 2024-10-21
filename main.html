@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Base64 Downloader</title>
+    <script>
+        function downloadFile() {
+            // Get the value from the textbox
+            const inputText = document.getElementById("inputText").value;
+
+            // Encode the text in Base64
+            const base64Text = btoa(inputText);
+
+            // Create a Blob from the Base64 string
+            const blob = new Blob([base64Text], { type: 'text/plain' });
+
+            // Create an anchor element and trigger a download
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'identifire_for_patch.txt';
+            link.click();
+
+            // Clean up
+            URL.revokeObjectURL(link.href);
+        }
+    </script>
+</head>
+<body>
+    <h1>Base64 Text Downloader</h1>
+    <textarea id="inputText" rows="10" cols="30" placeholder="Enter the thing that you copied..."></textarea><br>
+    <button onclick="downloadFile()">Download as identifire_for_patch.txt</button>
+</body>
+</html>
